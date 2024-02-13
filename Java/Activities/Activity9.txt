@@ -1,0 +1,25 @@
+package Activities;
+
+import java.util.ArrayList;
+
+public class Activity9 {
+
+    public static void main(String[] args) {
+        ArrayList<String> mylist = new ArrayList<String>();
+        mylist.add("Apple");
+        mylist.add("Orange");
+        mylist.add("Mango");
+        mylist.add(1, "Chiku");
+        mylist.add(4, "custedapple");
+        System.out.println("List of fruits");
+        for (String fruits:mylist)
+        {
+            System.out.println(fruits);
+        }
+        System.out.println("3rd name in the ArrayList" + mylist.get(2));
+        System.out.println("Is orange present in the list?" + mylist.contains("Orange"));
+        System.out.println("Number of fruits in the array" + mylist.size());
+        mylist.remove("Apple");
+        System.out.println("New Number of fruits in the array after remove" + mylist.size());
+    }
+}
