@@ -1,0 +1,52 @@
+Activity 3: 
+
+@Activity3
+  Feature:Testing with Tags
+    @simpleAlert @SmokeTest
+      Scenario: Test for Simple Alert
+      Given  User is on the page
+      When  User clicks the Simple Alert button
+      Then  Alert opens
+      And  Read the text from it and print it
+      And  Accept the alert and Close
+      And Close the Browse
+
+    @ConfirmAlert
+      Scenario: Test for Confirm Alert
+      Given User is on the page
+      When User clicks the Confirm Alert button
+      Then Alert opens
+      And Read the text from it and print it
+      And Close the alert with Cancel
+      And Close Browser
+
+    @PromptAlert
+      Scenario: Test for Prompt Alert
+      Given User is on the page
+      When User clicks the Prompt Alert button
+      Then Alert opens
+      And Read the text from it and print it
+      And Write a custom message in it
+      And Accept the alert and Close
+      And Close Browser
+	  
+	  
+	  
+Test Runner: 
+
+
+package TestRunner;
+
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = ("src/test/java/Feature"),
+        glue = {"StepDefinition"},
+        tags="@simpleAlert and @SmokeTest"
+)
+public class Activity3Runner {
+}

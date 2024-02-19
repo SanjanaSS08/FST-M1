@@ -1,0 +1,110 @@
+package StepDefinition;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import java.time.Duration;
+
+public class AlertTest {
+    WebDriver driver;
+    WebDriverWait wait;
+    Alert alert;
+
+    @Given("^User is on the page$")
+
+    public void loginpage()
+        {
+        driver = new FirefoxDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+
+        //open browser
+
+        driver.get("https://v1.training-support.net/selenium/javascript-alerts");
+    }
+
+    //click on simple button
+
+    @When("^User clicks the Simple Alert button$")
+
+    public void Simplebutton()
+    {
+        driver.findElement(By.id("#simple")).click();
+    }
+
+    //Switch to Alert
+    @Then("^Alert opens$")
+
+    public void Switchto()
+    {
+        alert = driver.switchTo().alert();
+    }
+
+    // read alert
+    @Then("^Read the text from it and print it$")
+
+    public void Readalert()
+    {
+        System.out.println("Alert message: "+alert.getText());
+    }
+
+    // write to prompt
+
+    @And("^Write a custom message in it$")
+
+    public void Writeprompt()
+        {
+        alert.sendKeys("Custom Message");
+    }
+
+    //Accept Alert
+    @And("^Accept the alert and Close$")
+
+    public void accept()
+    {
+        alert.accept();
+    }
+
+    //Dismiss Alert
+    @And("^Close the alert with Cancel$")
+
+    public void dismissAlert()
+    {
+        alert.dismiss();
+    }
+
+    // Close Browser
+    @And("^Close the Browse$")
+
+    public void closeBrowser()
+    {
+        driver.close();
+    }
+
+
+    //Click on Confimation button
+
+   @When("^User clicks the Confirm Alert button$")
+
+    public void Confirmationbutton()
+    {
+        driver.findElement(By.id("#confirm")).click();
+    }
+
+    //Click on prompt button
+    @When("^User clicks the Prompt Alert button$")
+
+    public void promtButton()
+    {
+        driver.findElement(By.id("#prompt")).click();
+    }
+
+
+}

@@ -1,0 +1,57 @@
+package StepDefinition;
+
+import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+public class LoginSteps {
+    WebDriverWait wait;
+    WebDriver driver;
+
+    @Given("^User login the webpage$")
+
+    public void loginpage()
+    {
+        WebDriver driver = new FirefoxDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(45));
+        driver.get("https://v1.training-support.net/selenium/login-form");
+
+    }
+     @When("^User enter username and password$")
+
+    public void entercredential()
+    {
+        driver.findElement(By.id("username")).sendKeys("admin");
+        driver.findElement(By.id("password")).sendKeys("password");
+        driver.findElement(By.xpath("//button[@class='ui button']")).click();
+
+    }
+
+    @Then("^Read the page title and confirmation message$")
+
+    public void ReadHeadingandMessage()
+    {
+        //wait.until(ExpectedCondition.visibilityofAllElementLocatedBy(By.id("action-confirmation")));
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("action-confirmation")));
+        String pagetitle = driver.getTitle();
+        String confirmmessage = driver.findElement(By.id("action-confirmation")).getText();
+
+        System.out.println("Page Title: "+pagetitle);
+        System.out.println("Confirmation Message: "+confirmmessage);
+    }
+    @And("^Close the Browser$")
+
+    public void closebrowser()
+    {
+        driver.close();
+    }
+}

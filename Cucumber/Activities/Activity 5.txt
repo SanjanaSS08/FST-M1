@@ -1,0 +1,30 @@
+@Activity5
+  Feature: Login Test
+    Scenario Outline: Testing Login with Example
+      Given User is on Login page
+      When User enter "<username>" and "<password>"
+      Then Read the page title and confirmation message
+      And Close the Browser
+      Examples:
+        | username | password |
+        |admin     |password|
+        |Admin     |Password|
+
+
+
+Test Runner: 
+
+package TestRunner;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/java/Feature",
+        glue = {"StepDefinition"},
+        tags ="@Activity5"
+)
+public class Activity5Runner {
+}

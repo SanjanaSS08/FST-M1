@@ -1,0 +1,30 @@
+
+Feature 4: 
+
+@Activity4
+
+Feature: Data driven test without Example
+
+  Scenario: Testing with Data from Scenario
+    Given User is on Login page
+    When User enters "admin" and "password"
+    Then Read the page title and confirmation message
+    And Close the Browser
+	
+	
+Test Runner: 
+	
+	package TestRunner;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/java/Feature",
+        glue = {"StepDefinition"},
+        tags ="@Activity4"
+)
+public class Activity4Runner {
+}

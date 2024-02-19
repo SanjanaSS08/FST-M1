@@ -1,0 +1,30 @@
+Feature:
+
+@Activity2
+Feature: Basic Syntax
+  Scenario: Test login functionality
+  Given User login the webpage
+  When User enter username and password
+  Then Read the page title and confirmation message
+  And Close the Browser
+  
+  
+  
+  Test Runner: 
+  
+  package TestRunner;
+
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
+
+@RunWith(Cucumber.class)
+@CucumberOptions(
+        features = "src/test/java/Feature",
+        glue ={"StepDefinition"},
+        tags = "@Activity2"
+)
+public class Activity2Runner {
+
+}
