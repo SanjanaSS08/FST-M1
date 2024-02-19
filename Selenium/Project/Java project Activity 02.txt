@@ -1,0 +1,32 @@
+package Project;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import java.time.Duration;
+
+public class Activity2 {
+    public static void main (String[] args) {
+        WebDriverManager.firefoxdriver().setup();
+        WebDriver driver = new FirefoxDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(40));
+        // using class name
+        driver.get("https://alchemy.hguy.co/jobs/");
+        String Title = driver.findElement(By.className("entry-title")).getText();
+        System.out.println(Title);
+
+        //testng assertion
+        Assert.assertEquals(Title,"Welcome to Alchemy Jobs");
+
+       /* if (Title == "Welcome to Alchemy Jobs") {
+            driver.close();
+        }
+
+        */
+
+    }
+}
