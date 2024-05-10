@@ -1,0 +1,62 @@
+package Project;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.swing.*;
+import java.time.Duration;
+
+public class Activity9 {
+    public static void main (String[] args)
+    {
+        WebDriverManager.firefoxdriver().setup();
+        WebDriver driver = new FirefoxDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        driver.get("https://alchemy.hguy.co/jobs/wp-admin");
+
+        driver.findElement(By.id("user_login")).sendKeys("root");
+        driver.findElement(By.id("user_pass")).sendKeys("pa$$w0rd");
+        driver.findElement(By.id("wp-submit")).click();
+        //driver.findElement(By.className("wp-menu-name")).click();
+        //wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.id("h1")));
+        // to click job_listing option
+        driver.findElement(By.xpath("//div[text()='Job Listings ']")).click();
+
+        /*Actions builder= new Actions(driver);
+        Action actionsToperform = (Action) builder.moveToElement("Job Listing");*/
+
+
+
+
+        //driver.findElement(("wp-menu-name")).click();
+        driver.findElement(By.linkText("Add New")).click();
+        Alert prompt_Alert = driver.switchTo().alert();
+        prompt_Alert.dismiss();
+       /* driver.findElement(By.id("_job_location")).sendKeys("Bangalore");
+        driver.findElement(By.id("_application")).sendKeys("abhiram@cklabs.com");
+        driver.findElement(By.id("_company_name")).sendKeys("IBM");
+        driver.findElement(By.id("_company_website")).sendKeys("www.ibm.com");
+        driver.findElement(By.id("_company_tagline")).sendKeys("if you grow we grow");
+        driver.findElement(By.id("_company_twitter")).sendKeys("www.IBM.Twitter.com");
+        driver.findElement(By.className("button button-small wp_job_manager_upload_file_button")).click();
+        driver.findElement(By.className("thumbnail")).click();
+        driver.findElement(By.id("_filled")).click();
+        driver.findElement(By.id("_featured")).click();
+        driver.findElement(By.className("button media-button button-primary button-large media-button-select")).click();
+        driver.findElement(By.className("components-button editor-post-publish-panel__toggle editor-post-publish-button__button is-primary")).click();
+        Alert prompt_Alert = driver.switchTo().alert();
+        prompt_Alert.accept();
+        driver.findElement(By.linkText("IBM")).getText();
+        driver.close();*/
+
+
+
+
+    }
+}
