@@ -1,58 +1,29 @@
-package Project;
+# Set up the Firefox Driver with WebDriverManger
+service = FirefoxService(GeckoDriverManager().install())
 
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
+# Start the Driver
+with webdriver.Firefox(service=service) as driver:
+    # Navigate to the URL
+    driver.get("https://v1.training-support.net/selenium/drag-drop")
 
-import java.time.Duration;
-import java.time.LocalDate;
+    # Print the title of the page
+    print("Page title is: ", driver.title)
 
-public class Activity7 {
-    public static void main(String[] args) {
-        WebDriverManager.firefoxdriver().setup();
-        WebDriver driver = new FirefoxDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+    # Declare the actions variable
+    actions = ActionChains(driver)
 
-        driver.get("https://alchemy.hguy.co/jobs/");
-        driver.findElement(By.linkText("Post a Job")).click();
-        driver.findElement(By.id("create_account_email")).sendKeys("ABC@gmail.com");
-        driver.findElement(By.id("job_title")).sendKeys("Banking");
-        driver.findElement(By.id("job_location")).sendKeys("Bangalore");
+    # Find the ball and store it
+    ball = driver.find_element(By.ID, "draggable")
+    # Find the dropzones and save them
+    dropzone1 = driver.find_element(By.ID, "droppable")
+    dropzone2 = driver.find_element(By.ID, "dropzone2")
 
-        //driver.findElement(options)
-        WebElement dropdown = driver.findElement(By.tagName("select"));
-        Select select = new Select(dropdown);
-        select.selectByValue("5");
+    # Perform the actions in separate lines
+    actions.drag_and_drop(ball, dropzone1).perform() # drag the ball into dropzone1
+    if(dropzone1.text.find("Dropped!")):
+        print("Dropzone 1 was activated!")
 
-
-        driver.findElement(By.id("application")).sendKeys("san@gmail.com");
-        driver.findElement(By.id("company_name")).sendKeys("IBM");
-        // description
-        driver.findElement(By.xpath("//iframe[@id='job_description_ifr']")).sendKeys("Hello");
-        driver.findElement(By.className("button")).click();
-        //wait
-        driver.findElement(By.id("job_preview_submit_button")).click();
-        String success = driver.findElement(By.id("post-5")).getText();
-        System.out.println(success);
-        driver.findElement(By.linkText("Jobs")).click();
-        String Date = driver.findElement(By.className("date")).getText();
-        System.out.println(Date);
-        //LocalDate now = LocalDate.now();
-        String jobpost = driver.findElement(By.tagName("h3")).getText();
-        Assert.assertEquals(jobpost,"Banking");
-
-
-       /* if (Date == String.valueOf(now)) {
-            System.out.println("Job is posted");
-        } else {
-            System.out.println("Job is not posted");
-        }*/
-
-
-    }
-}
+    # Perform the actions in separate lines
+    actions.drag_and_drop(ball, dropzone2).perform() # drag the ball into dropzone2
+    if(dropzone2.text.find("Dropped!")):
+        print("Dropzone 2 was activated!")
